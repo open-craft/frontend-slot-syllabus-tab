@@ -12,7 +12,9 @@ const PrintSyllabus = ({blockData}) => {
     const blocks = blockData?.blocks;
     const rootBlock = blockData?.blocks[blockData.root];
     const makeList = (items: string[] | null) => {
-        if (!items) { return ""; }
+        if (!items) {
+            return "";
+        }
         const itemsList = items.filter(item => !!item).join("</li><li>");
         return itemsList
             ? "<ul><li>" + items.filter(item => !!item).join("</li><li>") + "</li></ul>"
@@ -61,9 +63,10 @@ ${syllabusList}
 </html>
 `;
     return (
-        <div>
+        <div className="d-flex justify-content-end my-2">
             <iframe srcDoc={srcdoc} ref={iframeRef} className="d-none"></iframe>
-            <Button onClick={() => iframeRef.current.contentWindow.print()}>Print</Button>
+            <Button variant="outline-primary"
+                    onClick={() => iframeRef.current.contentWindow.print()}>Print</Button>
         </div>
     )
 }
@@ -112,7 +115,7 @@ export const Syllabus = () => {
     } = usePanels();
     useEffect(() => {
         if (blocks) {
-            setOpenPanels(Object.fromEntries(Object.keys(blocks).map(blockId => [blockId, true])));
+            setOpenPanels(Object.fromEntries(Object.keys(blocks).map(blockId => [blockId, false])));
         }
     }, [blocks, setOpenPanels]);
     const [query, setQuery] = useState('');
@@ -149,7 +152,6 @@ export const Syllabus = () => {
                         : 'Expand all'}
                 </Button>
             </div>
-            {blockData && <PrintSyllabus blockData={blockData}/>}
             {rootBlock && iterMatches(rootBlock, (sectionId: UsageId) => (
                 iterMatches(blocks[sectionId], (subsectionId: UsageId) => (
                     iterMatches(blocks[subsectionId], (unitId: UsageId) => (
@@ -169,7 +171,7 @@ export const Syllabus = () => {
                     ))
                 ))
             ), true)}
-
+            {blockData && <PrintSyllabus blockData={blockData}/>}
         </div>
     );
 };
