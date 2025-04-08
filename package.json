@@ -1,10 +1,10 @@
 {
-  "name": "@open-craft/frontend-slot-syllabus-tab",
+  "name": "@open-craft/frontend-plugin-syllabus-tab",
   "version": "0.1.0",
   "description": "Slot for frontend-app-learning to add a tab for displaying the syllabus",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/open-craft/frontend-slot-syllabus-tab.git"
+    "url": "git+https://github.com/open-craft/frontend-plugin-syllabus-tab.git"
   },
   "browserslist": [
     "extends @edx/browserslist-config"
@@ -19,12 +19,12 @@
   },
   "author": "OpenCraft",
   "license": "AGPL-3.0",
-  "homepage": "https://github.com/open-craft/frontend-slot-syllabus-tab#readme",
+  "homepage": "https://github.com/open-craft/frontend-plugin-syllabus-tab#readme",
   "publishConfig": {
     "access": "public"
   },
   "bugs": {
-    "url": "https://github.com/open-craft/frontend-slot-syllabus-tab/issues"
+    "url": "https://github.com/open-craft/frontend-plugin-syllabus-tab/issues"
   },
   "peerDependencies": {
     "@edx/frontend-platform": "^8.0.0",

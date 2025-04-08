@@ -17,7 +17,7 @@ export const SyllabusTabLink = () => {
       className={classNames('nav-item flex-shrink-0 nav-link', { active: !!match })}
       to={generatePath(SYLLABUS_ROUTE, { courseId })}
     >
-      {intl.formatMessage(messages.syllabusTabTitle)}
+      {intl.formatMessage(messages.syllabusTitle)}
     </Link>
   );
 };

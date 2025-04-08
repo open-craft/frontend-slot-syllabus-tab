@@ -1,4 +1,4 @@
-frontend-slot-syllabus-tab
+frontend-plugin-syllabus-tab
 ##########################
 
 Purpose
@@ -13,7 +13,7 @@ In ``frontend-app-learning`` create a file called ``env.config.jsx`` with the
 following contents:
 
 ```javascript
-import { slotConfig } from '@open-craft/frontend-slot-syllabus-tab';
+import { slotConfig } from '@open-craft/frontend-plugin-syllabus-tab';
 
 
 const config = {
@@ -28,5 +28,5 @@ export default config;
 Install this repo as:
 
 ```bash
-npm install --no-save https://github.com/open-craft/frontend-slot-syllabus-tab.git
+npm install --no-save https://github.com/open-craft/frontend-plugin-syllabus-tab.git
 ```

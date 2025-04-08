@@ -1,75 +1,12 @@
 import { Button, Icon, SearchField } from '@openedx/paragon';
 import { Link as LinkIcon } from '@openedx/paragon/icons';
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { Block, BlockMap, UsageId, useBlockData, usePanels, } from '../hooks';
 import { BlockCollapsible } from './BlockCollapsible';
 import { HighlightMatch } from './HighlightMatch';
-
-const PrintSyllabus = ({blockData}) => {
-    const iframeRef = useRef(null);
-    const blocks = blockData?.blocks;
-    const rootBlock = blockData?.blocks[blockData.root];
-    const makeList = (items: string[] | null) => {
-        if (!items) {
-            return "";
-        }
-        const itemsList = items.filter(item => !!item).join("</li><li>");
-        return itemsList
-            ? "<ul><li>" + items.filter(item => !!item).join("</li><li>") + "</li></ul>"
-            : "";
-    };
-    const syllabusList = makeList(rootBlock.children.map(sectionId =>
-        blocks[sectionId].display_name +
-        makeList(blocks[sectionId].children.map(subsectionId =>
-            blocks[subsectionId].display_name +
-            makeList(blocks[subsectionId].children.map(unitId =>
-                blocks[unitId].display_name +
-                makeList(blocks[unitId].children.flatMap((blockId) => (
-                    blocks[blockId]?.links?.map(link => link.text)
-                )))
-            ))
-        ))
-    ));
-
-
-    const srcdoc = `<html>
-<head>
-    <title>Syllabus</title>
-    <style>
-        body > ul {
-            break-inside: avoid;
-            break-after: auto;
-        }
-        ul ul {
-            break-inside: avoid;
-            break-before: avoid;
-            break-after: avoid;
-        }
-        li {
-            break-inside: avoid;
-        }
-        ul {
-            margin: 0;
-            padding-left: 1rem;
-            list-style: square;
-        }
-    </style>
-</head>
-<body>
-${syllabusList}
-</body>
-</html>
-`;
-    return (
-        <div className="d-flex justify-content-end my-2">
-            <iframe srcDoc={srcdoc} ref={iframeRef} className="d-none"></iframe>
-            <Button variant="outline-primary"
-                    onClick={() => iframeRef.current.contentWindow.print()}>Print</Button>
-        </div>
-    )
-}
+import { PrintSyllabus } from "./PrintSyllabus";
 
 const filteredBlocks = (
     rootId: UsageId | undefined,
