@@ -11,7 +11,7 @@ export const SyllabusTabLink = () => {
   const intl = useIntl();
   const match = useMatch(SYLLABUS_ROUTE);
   const { courseId } = useParams();
-  return match && courseId && (
+  return courseId && (
     <Link
       key="syllabus"
       className={classNames('nav-item flex-shrink-0 nav-link', { active: !!match })}
