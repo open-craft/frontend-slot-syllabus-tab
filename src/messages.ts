@@ -6,16 +6,16 @@ const messages = defineMessages({
     defaultMessage: 'Syllabus',
     description: 'For use in various places, e.g. the tab title.',
   },
-    collapseAll: {
-      id: 'plugins.syllabus.collapseAll',
-      defaultMessage: 'Collapse all',
-      description: 'Label for the button that collapses the course syllabus.',
-    },
-    expandAll: {
-      id: 'plugins.syllabus.expandAll',
-      defaultMessage: 'Expand all',
-      description: 'Label for the button that expands the course syllabus.',
-    }
+  collapseAll: {
+    id: 'plugins.syllabus.collapseAll',
+    defaultMessage: 'Collapse all',
+    description: 'Label for the button that collapses the course syllabus.',
+  },
+  expandAll: {
+    id: 'plugins.syllabus.expandAll',
+    defaultMessage: 'Expand all',
+    description: 'Label for the button that expands the course syllabus.',
+  },
 });
 
 export default messages;

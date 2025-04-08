@@ -61,7 +61,6 @@ const getCourseBlocksUrl = (courseId: string) => {
   url.searchParams.append('student_view_data', 'video,html,problem');
   url.searchParams.append('username', username);
   return url.toString();
-
 };
 
 export const useBlockData = (courseId?: string) => {

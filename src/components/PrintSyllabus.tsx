@@ -1,40 +1,34 @@
-import * as React from "react";
-import { useRef } from "react";
+import * as React from 'react';
+import { useRef } from 'react';
 import { useIntl } from '@edx/frontend-platform/i18n';
-import messages from "../messages";
-import {Button} from '@openedx/paragon';
+import { Button } from '@openedx/paragon';
+import messages from '../messages';
+import { BlockResponse } from '../hooks';
 
-export const PrintSyllabus = ({blockData}) => {
-    const intl = useIntl()
-    const iframeRef = useRef(null);
-    const blocks = blockData?.blocks;
-    const rootBlock = blockData?.blocks[blockData.root];
-    const makeList = (items: string[] | null) => {
-        if (!items) {
-            return "";
-        }
-        const itemsList = items.filter(item => !!item).join("</li><li>");
-        return itemsList
-            ? "<ul><li>" + items.filter(item => !!item).join("</li><li>") + "</li></ul>"
-            : "";
-    };
-    const syllabusList = makeList(rootBlock.children.map(sectionId =>
-        "<h1>" + blocks[sectionId].display_name + "</h1>" +
-        makeList(blocks[sectionId].children.map(subsectionId =>
-            "<h2>" + blocks[subsectionId].display_name + "</h2>" +
-            makeList(blocks[subsectionId].children.map(unitId =>
-                "<h3>" + blocks[unitId].display_name + "</h3>" +
-                makeList(blocks[unitId].children.flatMap((blockId) => (
-                    blocks[blockId]?.links?.map(link => link.text)
-                )))
-            ))
-        ))
-    ));
+export const PrintSyllabus = ({ blockData }: { blockData: BlockResponse }) => {
+  const intl = useIntl();
+  const iframeRef = useRef(null);
+  const blocks = blockData?.blocks;
+  const rootBlock = blockData?.blocks[blockData.root];
+  const makeList = (items: string[] | null) => {
+    if (!items) {
+      return '';
+    }
+    const itemsList = items.filter(item => !!item).join('</li><li>');
+    return itemsList
+      ? `<ul><li>${items.filter(item => !!item).join('</li><li>')}</li></ul>`
+      : '';
+  };
+  const syllabusList = makeList(rootBlock.children.map(sectionId => `<h1>${blocks[sectionId].display_name}</h1>${
+    makeList(blocks[sectionId].children.map(subsectionId => `<h2>${blocks[subsectionId].display_name}</h2>${
+      makeList(blocks[subsectionId].children.map(unitId => `<h3>${blocks[unitId].display_name}</h3>${
+        makeList(blocks[unitId].children.flatMap((blockId) => (
+          blocks[blockId]?.links?.map(link => link.text)
+        )))}`))}`))}`));
 
-
-    const srcdoc = `<html>
+  const srcdoc = `<html>
 <head>
-    <title>${intl.formatMessage(messages.syllabusTitle)}</title><!--    -->
+    <title>${intl.formatMessage(messages.syllabusTitle)}</title>
     <style>
         body > ul {
             padding: 0.125rem;
@@ -80,11 +74,19 @@ ${syllabusList}
 </body>
 </html>
 `;
-    return (
-        <div className="d-flex justify-content-end my-2 flex-column">
-            <iframe srcDoc={srcdoc} ref={iframeRef} className="d-flex w-100" style={{height:'800px'}}></iframe>
-            <Button variant="outline-primary"
-                    onClick={() => iframeRef.current.contentWindow.print()}>Print</Button>
-        </div>
-    )
-}
+  return (
+    <div className="d-flex justify-content-end my-2">
+      <iframe
+        srcDoc={srcdoc}
+        ref={iframeRef}
+        className="d-none"
+        title={intl.formatMessage(messages.syllabusTitle)}
+      />
+      <Button
+        variant="outline-primary"
+        onClick={() => iframeRef.current.contentWindow.print()}
+      >Print
+      </Button>
+    </div>
+  );
+};
