@@ -4,8 +4,9 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import {
-  Block, BlockMap, UsageId, useBlockData, usePanels,
+  useBlockData, usePanels,
 } from '../hooks';
+import { type BlockMap, type UsageId } from '../types';
 import { BlockCollapsible } from './BlockCollapsible';
 import { HighlightMatch } from './HighlightMatch';
 import { PrintSyllabus } from './PrintSyllabus';

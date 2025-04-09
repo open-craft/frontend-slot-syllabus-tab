@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Collapsible } from '@openedx/paragon';
-import { Block } from '../hooks';
+import { type Block } from '../types';
 import { HighlightMatch } from './HighlightMatch';
 
 interface BlockCollapsibleProps {

@@ -16,6 +16,11 @@ const messages = defineMessages({
     defaultMessage: 'Expand all',
     description: 'Label for the button that expands the course syllabus.',
   },
+  print: {
+    id: 'plugins.syllabus.print',
+    defaultMessage: 'Print',
+    description: 'Label for the button that prints the course syllabus.',
+  },
 });
 
 export default messages;

@@ -3,11 +3,11 @@ import { useRef } from 'react';
 import { useIntl } from '@edx/frontend-platform/i18n';
 import { Button } from '@openedx/paragon';
 import messages from '../messages';
-import { BlockResponse } from '../hooks';
+import { type BlockResponse } from '../types';
 
 export const PrintSyllabus = ({ blockData }: { blockData: BlockResponse }) => {
   const intl = useIntl();
-  const iframeRef = useRef(null);
+  const iframeRef = useRef<HTMLIFrameElement | null>(null);
   const blocks = blockData?.blocks;
   const rootBlock = blockData?.blocks[blockData.root];
   const makeList = (items: string[] | null) => {
@@ -43,29 +43,32 @@ export const PrintSyllabus = ({ blockData }: { blockData: BlockResponse }) => {
         }
 
         body > ul > li > ul {
-            break-inside: avoid;
             break-after: auto;
             list-style: none;
         }
+
         body ul ul ul ul li:before {
-            content: '\\01F517 ';
+            content: '\\01F517';
             margin-right: 0.5rem;
         }
+        
         body ul ul ul ul {
             list-style: none;
             padding-left: 0;
         }
-        body ul > li {
-            break-inside: avoid;
-            break-after: auto;
-        }
+
         body ul > li ul {
             break-after: auto;
+        }
+
+        li {
+            break-inside: avoid;
         }
 
         ul {
             margin: 0;
             padding-left: 1rem;
+            break-after: auto;
         }
     </style>
 </head>
@@ -82,11 +85,14 @@ ${syllabusList}
         className="d-none"
         title={intl.formatMessage(messages.syllabusTitle)}
       />
+      {iframeRef.current?.contentWindow && (
       <Button
         variant="outline-primary"
         onClick={() => iframeRef.current.contentWindow.print()}
-      >Print
+      >
+          {intl.formatMessage(messages.print)}
       </Button>
+      )}
     </div>
   );
 };

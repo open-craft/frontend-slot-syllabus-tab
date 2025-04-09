@@ -1,33 +1,10 @@
 import { getConfig } from '@edx/frontend-platform';
 import { getAuthenticatedHttpClient, getAuthenticatedUser } from '@edx/frontend-platform/auth';
 import { useEffect, useMemo, useState } from 'react';
+import { type BlockResponse, type UsageId } from './types';
 
-export type UsageId = string;
-
-export type Block = {
-  id: UsageId;
-  type: string;
-  display_name: string;
-  children: UsageId[];
-  student_view_data: {
-    html: string;
-  }
-  links: {
-    text: string;
-    href: string;
-  }[]
-};
-
-export type BlockMap = {
-  [blockId: UsageId]: Block;
-};
-
-type BlockResponse = {
-  blocks: BlockMap;
-  root: UsageId;
-};
-
-const processData = (data: BlockResponse) => {
+const processBlockData = (blockData: BlockResponse) => {
+  const data = { ...blockData };
   const domParser = new DOMParser();
   const pruneBlocks: UsageId[] = [];
   Object.keys(data.blocks).forEach((blockId) => {
@@ -69,7 +46,7 @@ export const useBlockData = (courseId?: string) => {
     (async () => {
       if (courseId === undefined) { return; }
       const { data } = await getAuthenticatedHttpClient().get(getCourseBlocksUrl(courseId));
-      setBlockData(processData(data));
+      setBlockData(processBlockData(data));
     })();
   }, [courseId]);
   return blockData;
