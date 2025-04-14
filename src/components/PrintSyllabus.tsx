@@ -88,9 +88,9 @@ export const PrintSyllabus = ({ blockData }: { blockData: BlockResponse }) => {
     const iframe = document.createElement('iframe');
     iframe.setAttribute("style", "display:none");
     document.body.appendChild(iframe);
-    iframe.contentWindow.open();
-    iframe.contentWindow.write(srcdoc);
-    iframe.contentWindow.close();
+    iframe.contentWindow.document.open();
+    iframe.contentWindow.document.write(srcdoc);
+    iframe.contentWindow.document.close();
     iframe.contentWindow.print();
   };
 
