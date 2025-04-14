@@ -85,8 +85,12 @@ export const PrintSyllabus = ({ blockData }: { blockData: BlockResponse }) => {
     const blocks = blockData?.blocks;
     const rootBlock = blockData?.blocks[blockData.root];
     const srcdoc = buildSyllabusForPrint(intl, blocks, rootBlock);
-    var iframe = document.createElement('iframe');
+    const iframe = document.createElement('iframe');
     iframe.setAttribute("style", "display:none");
+    document.body.appendChild(iframe);
+    iframe.contentWindow.open();
+    iframe.contentWindow.write(srcdoc);
+    iframe.contentWindow.close();
     iframe.contentWindow.print();
   };
 
