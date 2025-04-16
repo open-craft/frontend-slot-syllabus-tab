@@ -32,7 +32,7 @@
     "@openedx/frontend-plugin-framework": "^1.2.1",
     "@openedx/paragon": "^22.3.0",
     "@types/react": ">=17.0.39",
-    "classnames": "^2.5.1",
+    "classnames": "*",
     "react": ">=17.0.00",
     "react-dom": ">=17.0.0",
     "react-router-dom": "^6.15.0"
