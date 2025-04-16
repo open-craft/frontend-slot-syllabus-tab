@@ -1,0 +1,50 @@
+{
+  "name": "@open-craft/frontend-plugin-syllabus-tab",
+  "version": "0.1.0",
+  "description": "Slot for frontend-app-learning to add a tab for displaying the syllabus",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/open-craft/frontend-plugin-syllabus-tab.git"
+  },
+  "browserslist": [
+    "extends @edx/browserslist-config"
+  ],
+  "main": "dist/index.js",
+  "scripts": {
+    "preinstall": "npm run build",
+    "build": "fedx-scripts babel -x .ts,.tsx src --out-dir dist --ignore **/*.test.tsx,**/*.test.ts,**/setupTest.ts",
+    "lint": "fedx-scripts eslint --ext .ts --ext .tsx .",
+    "lint:fix": "fedx-scripts eslint --fix --ext .ts --ext .tsx .",
+    "test": "fedx-scripts jest --coverage --passWithNoTests"
+  },
+  "author": "OpenCraft",
+  "license": "AGPL-3.0",
+  "homepage": "https://github.com/open-craft/frontend-plugin-syllabus-tab#readme",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/open-craft/frontend-plugin-syllabus-tab/issues"
+  },
+  "peerDependencies": {
+    "@edx/frontend-platform": ">=7.0.0",
+    "@openedx/frontend-build": ">=13.0.0",
+    "@openedx/frontend-plugin-framework": "^1.2.1",
+    "@openedx/paragon": "^22.3.0",
+    "@types/react": ">=17.0.39",
+    "classnames": "*",
+    "react": ">=17.0.00",
+    "react-dom": ">=17.0.0",
+    "react-router-dom": "^6.15.0"
+  },
+  "devDependencies": {
+    "@openedx/frontend-build": "^14.2.0",
+    "@edx/typescript-config": "^1.0.1",
+    "@edx/browserslist-config": "^1.1.1",
+    "@testing-library/jest-dom": "5.17.0",
+    "@testing-library/react": "12.1.5",
+    "glob": "7.2.3",
+    "jest": "29.7.0",
+    "jest-environment-jsdom": "^29.7.0"
+  }
+}
